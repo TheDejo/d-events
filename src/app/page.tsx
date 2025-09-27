@@ -1,8 +1,10 @@
+import { PageComponentContainer } from '@/components/PageComponentContainer/PageComponentContainer';
+import styles from './page.module.scss';
+
 export default function Home() {
   return (
-    <main>
-      <h1>Welcome to D-Events-Venues</h1>
-      <p>Your events and venues platform</p>
-    </main>
+    <PageComponentContainer className={styles.homePage}>
+      <h1>Welcome to D events</h1>
+    </PageComponentContainer>
   );
 }
