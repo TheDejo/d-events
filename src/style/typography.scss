@@ -1,0 +1,89 @@
+// typography
+$heading1: 4rem; // 64px
+$heading2: 3rem; // 48px
+$heading3: 2.5rem; // 40px
+$heading4: 2.25rem; // 36px
+$heading5: 2rem; // 32px
+$heading6: 1.5rem; // 24px
+$font-size: 0.5rem; // 8px
+$font-normal: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+$primary-font: var(--font-inter);
+$color-black: #000;
+$color-dark: #232117;
+  $color-light: #F5F4F2;
+
+
+@mixin heading($size, $weight, $color: $color-black, $line-height: 100%) {
+  color: $color;
+  font-family: $primary-font;
+  font-size: $size;
+  font-style: normal;
+  font-weight: $weight;
+  line-height: $line-height;
+}
+
+@mixin regular-text($size, $weight, $color: $color-dark, $line-height: normal) {
+  color: $color;
+  font-family: $primary-font;
+  font-size: $size;
+  font-style: normal;
+  font-weight: $weight;
+  line-height: $line-height;
+}
+
+
+@mixin heading1 {
+  @include heading($heading1, 500);
+}
+
+@mixin heading2 {
+  @include heading($heading2, 500);
+}
+
+@mixin heading3 {
+  @include heading($heading3, 500);
+}
+
+@mixin heading4 {
+  @include heading($heading4, 500);
+}
+
+@mixin heading5 {
+  @include heading($heading5, 500);
+}
+
+@mixin heading6 {
+  @include heading($heading6, 700);
+}
+
+
+@mixin regular1 {
+  @include regular-text(32px, 500);
+}
+
+@mixin regular2 {
+  @include regular-text(24px, 500);
+}
+
+@mixin regular3 {
+  @include regular-text(20px, 500);
+}
+
+@mixin regular4 {
+  @include regular-text(16px, 400);
+}
+
+@mixin regular5 {
+  @include regular-text(14px, 400);
+}
+
+@mixin regular6 {
+  @include regular-text(12px, 400);
+}
+
+@mixin regular7 {
+  @include regular-text(10px, 400);
+}
