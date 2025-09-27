@@ -34,3 +34,16 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+# **Divine's Corner**
+
+### **How I approached solving the problem?**
+
+I approached the problem by carefully analyzing the  requirements and breaking the solution into several key components:
+
+1.  **Tools**:
+    - Next.js: Since Create React App is being deprecated (as noted on the React website), Next.js is the recommended choice. It also enables me to showcase server-side rendering (SSR), which is important for this project because the events are client-facing and need to be optimized for SEO, ensuring they appear in search results when users look for events.
+    
+    - SASS: I chose a preprocessor so I can define mixins, functions, and style tokens that capture design decisions. This allows consistent styling across the events application and makes the codebase more maintainable and scalable.
+
