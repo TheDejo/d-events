@@ -1,4 +1,7 @@
+@use '../style/core.scss' as core;
 
 .homePage {
-  // Add styles here
+  .events {
+    padding: core.$space4 0;
+  }
 }

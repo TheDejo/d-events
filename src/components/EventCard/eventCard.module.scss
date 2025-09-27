@@ -1,0 +1,92 @@
+@use '../../style/core.scss' as core;
+@use '../../style/typography.scss' as typography;
+@use '../../style/color.scss' as color;
+
+.eventCard {
+    @include typography.regular4;
+
+    width: core.$space1 * 40;
+
+    .textBox {
+        padding: core.$space2 0;
+    }
+
+    .date,
+    .title,
+    .location {
+        padding-bottom: core.$space1;
+    }
+
+    .title {
+        @include typography.heading6;
+
+        padding-bottom: core.$space1;
+    }
+
+    .facility {
+        font-weight: typography.$font-bold;
+    }
+
+    .accordionContainer {
+        padding-bottom: core.$space2;
+        width: core.$full;
+    }
+
+    .accordionBody {
+        background-color: color.$dice-background;
+        padding: 0 core.$space2 core.$space2;
+        width: core.$full;
+    }
+
+    .description,
+    .accordionSectionTitle {
+        padding-bottom: core.$space2;
+    }
+
+    .accordionSectionTitle,
+    .soldOut {
+        @include typography.regular5;
+
+        color: color.$dice-blue;
+        font-weight: typography.$font-bold;
+        text-transform: uppercase;
+    }
+
+    .lineupSection {
+        padding-bottom: core.$space2;
+    }
+
+    .lineupSection,
+    .ticketsSection {
+        display: flex;
+        flex-direction: column;
+        gap: core.$space1;
+    }
+
+    .seatPrice,
+    .lineupTimeValue {
+        font-weight: typography.$font-bold;
+    }
+
+    .soldOut {
+        color: color.$dice-black;
+        opacity: 0.5;
+    }
+
+    .footer {
+        align-items: flex-end;
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: core.$space2;
+    }
+
+    .priceLabel {
+        opacity: 0.5;
+    }
+
+    .priceValue {
+        @include typography.heading5;
+
+        font-weight: typography.$font-bold;
+    }
+}

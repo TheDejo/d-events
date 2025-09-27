@@ -47,3 +47,7 @@ I approached the problem by carefully analyzing the  requirements and breaking t
     
     - SASS: I chose a preprocessor so I can define mixins, functions, and style tokens that capture design decisions. This allows consistent styling across the events application and makes the codebase more maintainable and scalable.
 
+    - date-fns: A lightweight library that makes working with and formatting dates seamles
+
+    - classnames: Utility for cleaner, more readable conditional styling, avoiding complex template literals when applying multiple classes.
+
