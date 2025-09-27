@@ -1,0 +1,25 @@
+@use '../../style/typography.scss' as typography;
+@use '../../style/color.scss' as color;
+@use '../../style/core.scss' as core;
+
+.accordion {
+  overflow: hidden;
+
+  .accordionHeader {
+    @include typography.regular4;
+
+    align-items: center;
+    background-color: color.$dice-background;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    font-weight: typography.$font-bold;
+    justify-content: space-between;
+    padding: core.$space2;
+    width: core.$full;
+  }
+
+  .accordionContent {
+    width: fit-content;
+  }
+}

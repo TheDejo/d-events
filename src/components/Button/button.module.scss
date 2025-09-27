@@ -5,9 +5,9 @@
 .button {
     @include typography.regular4;
 
-    background-color: color.$color-button-blue;
+    background-color: color.$dice-blue;
     border: none;
-    color: color.$color-text-white;
+    color: color.$dice-white;
     cursor: pointer;
     font-weight: typography.$font-bold;
     outline: none;
@@ -17,11 +17,11 @@
     width: fit-content;
 
     &.secondary {
-        background-color: color.$color-button-gray;
-        color: color.$color-text-black;
+        background-color: color.$dice-gray;
+        color: color.$dice-black;
     }
 
     &.tertiary {
-        background-color: color.$color-button-black;
+        background-color: color.$dice-black;
     }
 }
