@@ -5,15 +5,15 @@
 .tag {
     @include typography.regular5;
 
-    background-color: color.$color-button-blue;
-    color: color.$color-text-white;
+    background-color: color.$dice-blue;
+    color: color.$dice-white;
     font-weight: typography.$font-bold;
     padding: core.$space1;
     text-transform: uppercase;
     width: fit-content;
 
     &.onSale {
-        background-color: color.$color-button-black;
+        background-color: color.$dice-black;
         text-transform: unset;
     }
 }
