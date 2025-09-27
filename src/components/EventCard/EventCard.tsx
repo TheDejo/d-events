@@ -70,9 +70,17 @@ export default function EventCard({
                 {lineup.name.map((name, index) => (
                   <p className={styles.lineupName} key={index}>{name}</p>
                 ))}
-                <p className={styles.lineupTime}>
-                  {lineup.curfew ? localTexts.curfew.replace('{curfew}', formatTime(calculateCurfewTime(lineup.curfew))) : ''}
-                </p>
+              <p className={styles.lineupTime}>
+                {lineup.curfew && (
+                  <>
+                    {localTexts.curfew}{' '}
+                    <span className={styles.lineupTimeValue}>
+                      — {formatTime(calculateCurfewTime(lineup.curfew))}
+                    </span>
+                  </>
+                )}
+              </p>
+
               </div>
               <div className={styles.ticketsSection}>
                 <h4 className={styles.accordionSectionTitle}>{localTexts.tickets}</h4>
