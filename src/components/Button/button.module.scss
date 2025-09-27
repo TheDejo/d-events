@@ -9,12 +9,12 @@
     border: none;
     color: color.$color-text-white;
     cursor: pointer;
+    font-weight: typography.$font-bold;
     outline: none;
     padding: core.$space2 core.$space3;
     text-decoration: none;
     text-transform: uppercase;
     width: fit-content;
-    font-weight: typography.$font-bold;
 
     &.secondary {
         background-color: color.$color-button-gray;

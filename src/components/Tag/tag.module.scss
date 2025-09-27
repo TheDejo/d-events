@@ -7,9 +7,9 @@
 
     background-color: color.$color-button-blue;
     color: color.$color-text-white;
+    font-weight: typography.$font-bold;
     padding: core.$space1;
     text-transform: uppercase;
-    font-weight: typography.$font-bold;
     width: fit-content;
 
     &.onSale {
