@@ -4,7 +4,7 @@ $heading2: 3rem; // 48px
 $heading3: 2.5rem; // 40px
 $heading4: 2.25rem; // 36px
 $heading5: 2rem; // 32px
-$heading6: 1.5rem; // 24px
+$heading6: 1.75rem; // 28px
 $font-size: 0.5rem; // 8px
 $font-normal: 400;
 $font-medium: 500;
@@ -13,7 +13,7 @@ $font-bold: 700;
 $primary-font: var(--font-inter);
 $color-black: #000;
 $color-dark: #232117;
-  $color-light: #F5F4F2;
+$color-light: #F5F4F2;
 
 
 @mixin heading($size, $weight, $color: $color-black, $line-height: 100%) {

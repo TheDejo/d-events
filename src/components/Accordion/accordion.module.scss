@@ -16,10 +16,18 @@
     font-weight: typography.$font-bold;
     justify-content: space-between;
     padding: core.$space2;
+    transition: background-color 0.2s ease;
     width: core.$full;
   }
 
   .accordionContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
     width: fit-content;
+
+    &.open {
+      max-height: core.$space1 * 100;
+    }
   }
 }
