@@ -1,0 +1,27 @@
+@use '../../style/core.scss' as core;
+@use '../../style/typography.scss' as typography;
+@use '../../style/color.scss' as color;
+
+.button {
+    @include typography.regular4;
+
+    background-color: color.$color-button-blue;
+    border: none;
+    color: color.$color-text-white;
+    cursor: pointer;
+    outline: none;
+    padding: core.$space2 core.$space3;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: fit-content;
+    font-weight: typography.$font-bold;
+
+    &.secondary {
+        background-color: color.$color-button-gray;
+        color: color.$color-text-black;
+    }
+
+    &.tertiary {
+        background-color: color.$color-button-black;
+    }
+}
