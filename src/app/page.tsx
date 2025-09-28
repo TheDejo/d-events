@@ -1,9 +1,14 @@
+'use client';
 import { PageComponentContainer } from '@/components/PageComponentContainer/PageComponentContainer';
 import styles from './page.module.scss';
 import EventCard from '@/components/EventCard/EventCard';
+import { useGetEvents } from '@/utils/hooks/useGetEvents';
+import logger from '@/utils/logger.config';
 
 
 export default function Home() {
+  const { data } = useGetEvents({ params: { page: 1, limit: 10 } });
+  logger({ data });
   return (
     <PageComponentContainer className={styles.homePage}>
       <section className={styles.events}>
