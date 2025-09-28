@@ -1,6 +1,7 @@
 @use '../style/core.scss' as core;
 @use '../style/typography.scss' as typography;
 @use '../style/breakpoint.scss' as breakpoint;
+@use '../style/color.scss' as color;
 
 .homePage {
   .events {
@@ -39,6 +40,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: core.$space2;
+    padding-top: core.$space7;
+  }
+
+  .noEvents {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: core.$space4 0;
+
+    h3 {
+      @include typography.heading6;
+      margin-bottom: core.$space2;
+      color: color.$dice-black;
+    }
+
+    p {
+      @include typography.regular4;
+      color: color.$dice-black;
+    }
   }
 }

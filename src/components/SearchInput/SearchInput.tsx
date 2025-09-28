@@ -4,6 +4,7 @@ import { useVenueSearch } from '@/utils/hooks/useVenueSearch';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import styles from './SearchInput.module.scss';
 import { SIZES } from '@/utils/types';
+import localTexts from './searchInput.texts.json';
 
 export default function SearchInput() {
   const {
@@ -12,8 +13,6 @@ export default function SearchInput() {
     displayOptions,
     showDropdown,
     showNoResults,
-    shouldSearch,
-    debouncedSearchTerm,
     handleInputChange,
     handleVenueSelect,
     handleInputFocus,
@@ -43,7 +42,7 @@ export default function SearchInput() {
       {showDropdown && (
         <div className={styles.dropdown}>
           <div className={styles.sectionHeader}>
-            {shouldSearch ? 'Search results' : 'Recent venues'}
+            {searchTerm.length >= 3 ? localTexts.searchResults : localTexts.recentVenues}
           </div>
           {displayOptions.map((venue) => (
             <div
@@ -61,7 +60,7 @@ export default function SearchInput() {
       {showNoResults && (
         <div className={styles.dropdown}>
           <div className={styles.noResults}>
-            No venues found for &quot;{debouncedSearchTerm}&quot;
+            No venues found for &quot;{searchTerm}&quot;
           </div>
         </div>
       )}

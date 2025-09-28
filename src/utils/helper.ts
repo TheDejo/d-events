@@ -14,11 +14,13 @@ const formatNumber = ({
     isCurrency = false,
     currency = CURRENCIES.USD,
     notation = 'standard',
+    fractionDigits = 0,
   }: {
     number: number;
     isCurrency?: boolean;
     currency?: CURRENCIES;
     notation?: 'compact' | 'standard';
+    fractionDigits?: number;
   }): string => {
     const locale = 'en-GB';
     const numberToFormat = number;
@@ -29,8 +31,8 @@ const formatNumber = ({
           currencySign: 'accounting',
           notation,
           style: 'currency',
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0,
+          minimumFractionDigits: fractionDigits,
+          maximumFractionDigits: fractionDigits,
         }).format(numberToFormat)
       : new Intl.NumberFormat(locale, { notation }).format(numberToFormat);
   };

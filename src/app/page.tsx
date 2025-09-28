@@ -9,13 +9,15 @@ import { useEventsContext } from '@/utils/context/EventsContext';
 import localTexts from './home.texts.json';
 import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner';
 
+const CURRENCY_DIVISOR = 100;
+
 
 export default function Home() {
-  const { data, isLoading } = useEventsContext();
+  const { data, isLoading, venue, loadMore, hasMore, isFetchingMore } = useEventsContext();
   const events  = data?.map((event) => ({
     title: event.name,
     location: event.location.state,
-    price: event.price || 0,
+    price: event.ticket_types[0].price.face_value / CURRENCY_DIVISOR || 0, // Using this priece because the 'price' field is always null
     venue: event.venue,
     soldOut: event.sold_out,
     currency: event.currency,
@@ -46,19 +48,35 @@ export default function Home() {
           <SearchInput />
         </div>
         <div>
-          <h1 className={styles.heading}>{localTexts.heading}</h1>
+          <h1 className={styles.heading}>{localTexts.heading.replace('{venue}', venue)}</h1>
         </div>
         <div className={styles.eventsContainer}>
-          {events?.map((event) => (
-            <EventCard 
-            key={event.id} 
-            {...event}
-            />
-          ))}
+          {events && events.length > 0 ? (
+            events.map((event) => (
+              <EventCard 
+              key={event.id} 
+              {...event}
+              />
+            ))
+          ) : !isLoading ? (
+            <div className={styles.noEvents}>
+              <h3>{localTexts.noEvents}</h3>
+              <p>{venue ? localTexts.noEventsForVenue.replace('{venue}', venue) : localTexts.noEvents}</p>
+            </div>
+          ) : null}
         </div>
 
         <div className={styles.loadMoreButton}>
-            {isLoading ? <LoadingSpinner size={SIZES.LARGE} /> : <Button title={localTexts.loadMore} variant={VARIANTS.TERTIARY} />}
+            {isLoading ? (
+              <LoadingSpinner size={SIZES.LARGE} />
+            ) : hasMore ? (
+              <Button 
+                title={localTexts.loadMore} 
+                variant={VARIANTS.SECONDARY} 
+                onClick={loadMore}
+                isLoading={isFetchingMore}
+              />
+            ) : null}
         </div>
       </section>
     </PageComponentContainer> 

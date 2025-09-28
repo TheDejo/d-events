@@ -40,6 +40,8 @@ type EventCardProps = {
   spotifyTracks?: { open_url: string; preview_url: string; title: string; }[];
 }
 
+const CURRENCY_DIVISOR = 100;
+
 export default function EventCard({ 
   title, 
   location, 
@@ -57,9 +59,7 @@ export default function EventCard({
   description,
   appleMusicTracks,
   spotifyTracks }: EventCardProps) {
-  const saleDate = new Date(saleStartDate);
-  console.log(status);
-  
+  const saleDate = new Date(saleStartDate);  
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   
   const hasTracks = (appleMusicTracks && !!appleMusicTracks.length) || (spotifyTracks && !!spotifyTracks.length);
@@ -110,7 +110,13 @@ export default function EventCard({
               <div className={styles.ticketsSection}>
                 <h4 className={styles.accordionSectionTitle}>{localTexts.tickets}</h4>
                 {tickets.map((ticket, index) => (
-                  <p key={index}>{ticket.name} <span className={styles.seatPrice}>— £{ticket.price}</span> <span className={styles.soldOut}>{ticket.soldOut ? localTexts.soldOut : ''}</span></p>
+                  <p 
+                  key={index}>{ticket.name} 
+                  <span className={styles.seatPrice}>— {helpers.formatNumber({ 
+                    number: ticket.price / CURRENCY_DIVISOR, 
+                    isCurrency: true,
+                     currency, 
+                     fractionDigits: 2 })}</span> <span className={styles.soldOut}>{ticket.soldOut ? localTexts.soldOut : ''}</span></p>
                 ))}
               </div>
             </div>
