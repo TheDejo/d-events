@@ -4,6 +4,7 @@ import styles from './page.module.scss';
 import EventCard from '@/components/EventCard/EventCard';
 import { useGetEvents } from '@/utils/hooks/useGetEvents';
 import logger from '@/utils/logger.config';
+import SearchInput from '@/components/SearchInput/SearchInput';
 
 
 export default function Home() {
@@ -12,6 +13,9 @@ export default function Home() {
   return (
     <PageComponentContainer className={styles.homePage}>
       <section className={styles.events}>
+        <div className={styles.searchInputContainer}>
+          <SearchInput />
+        </div>
         <EventCard 
           title="Jack and the Beanstalk"
           location="London, UK"

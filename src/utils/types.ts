@@ -9,6 +9,12 @@ export enum TAG_TYPES {
   ON_SALE = 'on_sale',
 }
 
+export enum SIZES {
+  SMALL = 'small',
+  MEDIUM = 'medium',
+  LARGE = 'large',
+}
+
 export interface Event {
   flags: string[];
   venue: string;

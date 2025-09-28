@@ -1,0 +1,42 @@
+@use '../../style/color.scss' as color;
+@use '../../style/core.scss' as core;
+@use '../../style/typography.scss' as typography;
+
+.loadingSpinner {
+    display: inline-block;
+    height: core.$space2;
+    position: relative;
+    width: core.$space2;
+
+    &.medium {
+        height: core.$space6;
+        width: core.$space6;
+    }
+
+    &.large {
+        height: core.$space9;
+        width: core.$space9;
+    }
+
+    .loadingSpinnerInner {
+        animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border: core.$space * 2 solid color.$dice-black;
+        border-color: color.$dice-black transparent transparent transparent;
+        border-radius: 50%;
+        box-sizing: border-box;
+        display: block;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

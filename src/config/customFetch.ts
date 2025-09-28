@@ -50,14 +50,6 @@ const createTimeoutSignal = (timeout: number): AbortSignal => {
   return controller.signal;
 };
 
-const logRequest = (url: string, options: RequestInit): void => {
-    logger({
-      method: options.method || 'GET',
-      headers: options.headers,
-      url: url,
-    });
-};
-
 const logError = (error: CustomFetchError, attempt: number): void => {
     logger({
       url: error.url,
@@ -66,13 +58,6 @@ const logError = (error: CustomFetchError, attempt: number): void => {
       message: error.message,
       attempt,
     });
-};
-
-const logSuccess = (url: string, status: number): void => {
-  logger({
-    url: url,
-    status: status,
-  });
 };
 
 async function customFetch(
@@ -90,7 +75,6 @@ async function customFetch(
 
   for (let attempt = 1; attempt <= retries + 1; attempt++) {
     try {
-      logRequest(url, fetchOptions);
 
       const timeoutSignal = createTimeoutSignal(timeout);
       const combinedSignal = fetchOptions.signal 
@@ -116,7 +100,6 @@ async function customFetch(
         );
       }
 
-      logSuccess(url, response.status);
       return response;
 
     } catch (error) {
