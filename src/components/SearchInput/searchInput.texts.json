@@ -1,4 +1,10 @@
 {
     "searchResults": "Search results",
-    "recentVenues": "Recent venues"
+    "recentVenues": "Recent venues",
+    "noResults": "No venues found for &quot;{searchTerm}&quot;",
+    "placeholder": "Search venues...",
+    "helpText": "Type at least 3 characters to search venues. Use arrow keys to navigate results.",
+    "loadingLabel": "Loading venues",
+    "noVenuesFound": "No venues found",
+    "venueOptions": "{count} venue options"
 }

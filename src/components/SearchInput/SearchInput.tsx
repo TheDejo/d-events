@@ -28,27 +28,48 @@ export default function SearchInput() {
           onChange={handleInputChange}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
-          placeholder="Search venues..."
+          placeholder={localTexts.placeholder}
           className={styles.searchInput}
+          role="combobox"
+          aria-expanded={showDropdown}
+          aria-haspopup="listbox"
+          aria-autocomplete="list"
+          aria-describedby="search-help"
         />
         
         {isLoading && (
-          <div className={styles.loadingIndicator}>
+          <div 
+            className={styles.loadingIndicator}
+            aria-live="polite"
+            aria-label={localTexts.loadingLabel}
+          >
             <LoadingSpinner size={SIZES.SMALL} />
           </div>
         )}
       </div>
 
+      <div id="search-help" className="sr-only">
+        {localTexts.helpText}
+      </div>
+
       {showDropdown && (
-        <div className={styles.dropdown}>
-          <div className={styles.sectionHeader}>
+        <div 
+          className={styles.dropdown}
+          role="listbox"
+          aria-label={localTexts.venueOptions.replace('{count}', displayOptions.length.toString())}
+        >
+          <div className={styles.sectionHeader} role="presentation">
             {searchTerm.length >= 3 ? localTexts.searchResults : localTexts.recentVenues}
           </div>
-          {displayOptions.map((venue) => (
+          {displayOptions.map((venue, index) => (
             <div
               key={venue.id}
+              id={`search-option-${index}`}
               className={styles.dropdownItem}
               onClick={() => handleVenueSelect(venue)}
+              role="option"
+              tabIndex={-1}
+              aria-label={`${venue.name}, ${venue.city}`}
             >
               <div className={styles.venueName}>{venue.name}</div>
               <div className={styles.venueCity}>{venue.city}</div>
@@ -58,9 +79,14 @@ export default function SearchInput() {
       )}
 
       {showNoResults && (
-        <div className={styles.dropdown}>
+        <div 
+          className={styles.dropdown}
+          role="status"
+          aria-live="polite"
+          aria-label={localTexts.noVenuesFound}
+        >
           <div className={styles.noResults}>
-            No venues found for &quot;{searchTerm}&quot;
+            {localTexts.noResults.replace('{searchTerm}', searchTerm)}
           </div>
         </div>
       )}
