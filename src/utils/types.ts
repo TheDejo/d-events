@@ -9,14 +9,31 @@ export enum TAG_TYPES {
   ON_SALE = 'on_sale',
 }
 
+export enum SIZES {
+  SMALL = 'small',
+  MEDIUM = 'medium',
+  LARGE = 'large',
+}
+
+export enum CURRENCIES {
+  GBP = 'GBP',
+  USD = 'USD',
+  EUR = 'EUR',
+}
+
+export enum STATUS {
+  ON_SALE = 'on-sale',
+  CANCELLED = 'cancelled',
+}
+
 export interface Event {
   flags: string[];
   venue: string;
   hash: string;
   perm_name: string;
   genre_tags: string[];
-  date: string; // ISO date string
-  currency: string;
+  date: string;
+  currency: CURRENCIES;
   price: number | null;
   images: string[];
   destination_event_perm_name: string | null;
@@ -29,11 +46,15 @@ export interface Event {
   url: string;
   timezone: string;
   type_tags: string[];
-  status: string;
+  status: STATUS;
   show_price_breakdown: boolean;
   venues: Venue[];
   presented_by: string;
-  apple_music_tracks: any[];
+  apple_music_tracks:  {
+    open_url: string;
+    preview_url: string;
+    title: string;
+  }[];
   sold_out: boolean;
   announcement_date: string;
   destination_event_id: string | null;
@@ -50,7 +71,11 @@ export interface Event {
   ticket_types: TicketType[];
   id: string;
   name: string;
-  spotify_tracks: any[];
+  spotify_tracks: {
+    open_url: string;
+    preview_url: string;
+    title: string;
+  }[];
   detailed_artists: any[];
   bundles: any[];
   type: string;

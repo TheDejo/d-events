@@ -1,0 +1,104 @@
+@use '../../style/color.scss' as color;
+@use '../../style/typography.scss' as typography;
+@use '../../style/core.scss' as core;
+
+.searchContainer {
+    max-width: core.$space1 * 50;
+    position: relative;
+    width: core.$full;
+
+    .inputWrapper {
+        align-items: center;
+        display: flex;
+        position: relative;
+    }
+
+    .searchInput {
+        @include typography.regular4;
+
+        background-color: color.$dice-white;
+        border: core.$space solid color.$dice-black;
+        border-radius: core.$space1;
+        padding: core.$space2;
+        padding-right: core.$space1 * 6;
+        transition: border-color 0.2s ease;
+        width: core.$full;
+
+        &:focus {
+            border-color: color.$dice-blue;
+            outline: none;
+        }
+
+        &::placeholder {
+            color: color.$dice-black;
+            opacity: 0.5;
+        }
+    }
+
+    .loadingIndicator {
+        color: color.$dice-black;
+        font-size: core.$space2;
+        position: absolute;
+        right: core.$space2;
+    }
+
+    .dropdown {
+        background: color.$dice-white;
+        border: core.$space solid color.$dice-black;
+        border-radius: core.$space1;
+        left: 0;
+        margin-top: core.$space * 4;
+        max-height: core.$space1 * 25;
+        overflow-y: auto;
+        position: absolute;
+        right: 0;
+        top: core.$full;
+        z-index: 2;
+    }
+
+    .dropdownItem {
+        border-bottom: core.$space solid color.$dice-background;
+        cursor: pointer;
+        padding: core.$space2;
+        transition: background-color 0.2s ease;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:hover {
+            background-color: color.$dice-background;
+        }
+    }
+
+    .venueName {
+        @include typography.regular4;
+
+        font-weight: typography.$font-medium;
+        margin-bottom: core.$space * 2;
+    }
+
+    .venueCity {
+        @include typography.regular5;
+
+        color: color.$dice-black;
+    }
+
+    .noResults {
+        @include typography.regular5;
+
+        color: color.$dice-black;
+        padding: core.$space2;
+        text-align: center;
+    }
+
+    .sectionHeader {
+        @include typography.regular5;
+
+        background-color: color.$dice-background;
+        border-bottom: core.$space solid color.$dice-background;
+        color: color.$dice-black;
+        font-weight: typography.$font-medium;
+        padding: core.$space1 core.$space2;
+    }
+}

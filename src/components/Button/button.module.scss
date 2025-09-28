@@ -17,11 +17,17 @@
     width: fit-content;
 
     &.secondary {
-        background-color: color.$dice-gray;
-        color: color.$dice-black;
+        background-color: color.$dice-black;
     }
 
     &.tertiary {
-        background-color: color.$dice-black;
+        background-color: transparent;
+        padding: 0;
+    }
+
+    &:disabled {
+        background-color: color.$dice-gray;
+        color: color.$dice-black;
+        cursor: not-allowed;
     }
 }

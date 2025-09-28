@@ -1,18 +1,18 @@
 'use client'
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './accordion.module.scss';
 import cx from 'classnames';
 
 type AccordionProps = {
   children: React.ReactNode;
   title: string;
+  isOpen: boolean;
+  onToggle: (isOpen: boolean) => void;
 };
 
-export default function Accordion({ children, title }: AccordionProps) {
-  const [isOpen, setIsOpen] = useState(false);
-
+export default function Accordion({ children, title, isOpen, onToggle }: AccordionProps) {
   const toggleAccordion = () => {
-    setIsOpen(!isOpen);
+    onToggle(!isOpen);
   };
 
   return (
