@@ -20,14 +20,14 @@
 
     .loadingSpinnerInner {
         animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border: core.$space * 2 solid color.$dice-black;
-        border-color: color.$dice-black transparent transparent transparent;
-        border-radius: 50%;
+        border: core.$space * 2 solid color.$dice-blue;
+        border-color: color.$dice-blue transparent transparent transparent;
+        border-radius: core.$full * 0.5;
         box-sizing: border-box;
         display: block;
-        height: 100%;
+        height: core.$full;
         position: absolute;
-        width: 100%;
+        width: core.$full;
     }
 }
 

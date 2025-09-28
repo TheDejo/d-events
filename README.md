@@ -51,3 +51,5 @@ I approached the problem by carefully analyzing the  requirements and breaking t
 
     - classnames: Utility for cleaner, more readable conditional styling, avoiding complex template literals when applying multiple classes.
 
+    - SWR: Integrated to enable frontend data caching with stale-while-revalidate, ensuring fast rendering from cache while seamlessly updating with fresh data in the background.
+

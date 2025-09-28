@@ -1,4 +1,6 @@
 {
-    "heading": "Up coming events at Venue",
-    "loadMore": "Load More"
+    "heading": "Up coming events at {venue}",
+    "loadMore": "Load More",
+    "noEvents": "No events found",
+    "noEventsForVenue": "No events found for {venue}"
 }

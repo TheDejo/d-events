@@ -16,6 +16,10 @@
     text-transform: uppercase;
     width: fit-content;
 
+    .loadingSpinner {
+        margin-right: core.$space2;
+    }
+
     &.secondary {
         background-color: color.$dice-black;
     }

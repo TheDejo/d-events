@@ -1,9 +1,9 @@
-import { useState, useMemo } from 'react';
-import { useGetEvents } from './useGetEvents';
+import { useState, useMemo, useEffect } from 'react';
+import { useEventsContext } from '../context/EventsContext';
 import useLocalStorage from './useLocalStorage';
 import { useDebounce } from './useDebounce';
 import { constants } from '@/config/constants';
-
+import { Event } from '@/utils/types';
 
 const { LOCAL_STORAGE_KEYS } = constants;
 
@@ -19,23 +19,20 @@ export const useVenueSearch = () => {
   const [recentVenues, setRecentVenues] = useLocalStorage<VenueOption[]>(LOCAL_STORAGE_KEYS.RECENT_VENUES, []);
   
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
-  const shouldSearch = debouncedSearchTerm.length >= 3;
+  const { data: eventsData, isLoading, setVenue } = useEventsContext();
 
-  const { data: eventsData, isLoading } = useGetEvents({
-    params: {
-      venue: shouldSearch ? debouncedSearchTerm : undefined,
-      limit: Infinity,
-    },
-  });
+  useEffect(() => {
+    setVenue(debouncedSearchTerm.length >= 3 ? debouncedSearchTerm : '');
+  }, [debouncedSearchTerm, setVenue]);
 
   const venueOptions = useMemo(() => {
-    if (!eventsData?.data || !shouldSearch) return [];
+    if (!eventsData || debouncedSearchTerm.length < 3) return [];
     
     const venues = new Map<string, VenueOption>();
     const searchLower = debouncedSearchTerm.toLowerCase();
     
-    eventsData.data.forEach(event => {
-      event.venues?.forEach(venue => {
+    eventsData.forEach((event: Event) => {
+      event.venues?.forEach((venue) => {
         const venueName = venue.name.toLowerCase();
         const cityName = venue.city.name.toLowerCase();
         
@@ -50,13 +47,13 @@ export const useVenueSearch = () => {
     });
     
     return Array.from(venues.values()).sort((a, b) => a.name.localeCompare(b.name));
-  }, [eventsData, debouncedSearchTerm, shouldSearch]);
+  }, [eventsData, debouncedSearchTerm]);
 
   const displayOptions = useMemo(() => {
-    if (shouldSearch) return venueOptions;
-    if (!searchTerm && !!recentVenues.length) return recentVenues.slice(0, 5);
+    if (debouncedSearchTerm.length >= 3) return venueOptions;
+    if (!searchTerm && recentVenues.length > 0) return recentVenues.slice(0, 5);
     return [];
-  }, [venueOptions, recentVenues, searchTerm, shouldSearch]);
+  }, [venueOptions, recentVenues, searchTerm, debouncedSearchTerm]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -70,24 +67,19 @@ export const useVenueSearch = () => {
   };
 
   const handleInputFocus = () => {
-    if (!!displayOptions.length) setIsOpen(true);
+    if (displayOptions.length > 0) setIsOpen(true);
   };
 
   const handleInputBlur = () => {
     setTimeout(() => setIsOpen(false), 150);
   };
 
-  const showDropdown = isOpen && !!displayOptions.length;
-  const showNoResults = isOpen && !isLoading && !displayOptions.length && shouldSearch;
-
   return {
     searchTerm,
     isLoading,
     displayOptions,
-    showDropdown,
-    showNoResults,
-    shouldSearch,
-    debouncedSearchTerm,
+    showDropdown: isOpen && displayOptions.length > 0,
+    showNoResults: isOpen && !isLoading && displayOptions.length === 0 && debouncedSearchTerm.length >= 3,
     handleInputChange,
     handleVenueSelect,
     handleInputFocus,

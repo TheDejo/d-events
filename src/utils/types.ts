@@ -27,47 +27,21 @@ export enum STATUS {
 }
 
 export interface Event {
-  flags: string[];
   venue: string;
-  hash: string;
-  perm_name: string;
-  genre_tags: string[];
   date: string;
   currency: CURRENCIES;
   price: number | null;
-  images: string[];
-  destination_event_perm_name: string | null;
-  int_id: number;
-  cities: City[];
-  age_limit: string;
   location: Location;
-  all_ttys_code_locked: boolean;
-  raw_description: string;
-  url: string;
-  timezone: string;
-  type_tags: string[];
   status: STATUS;
-  show_price_breakdown: boolean;
   venues: Venue[];
-  presented_by: string;
   apple_music_tracks:  {
     open_url: string;
     preview_url: string;
     title: string;
   }[];
   sold_out: boolean;
-  announcement_date: string;
-  destination_event_id: string | null;
-  links: any[];
-  external_url: string | null;
-  is_multi_days_event: boolean;
   featured: boolean;
-  sale_end_date: string;
-  linkout_type: string | null;
-  promoters: Promoter[];
-  checksum: string;
   event_images: EventImages;
-  date_end: string;
   ticket_types: TicketType[];
   id: string;
   name: string;
@@ -76,15 +50,9 @@ export interface Event {
     preview_url: string;
     title: string;
   }[];
-  detailed_artists: any[];
-  bundles: any[];
-  type: string;
-  tags: string[];
   description: string;
   lineup: Lineup[];
-  address: string;
   sale_start_date: string;
-  artists: any[];
 }
 
 export interface City {
