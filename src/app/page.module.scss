@@ -11,23 +11,26 @@
   .heading {
     @include typography.heading6;
 
-    padding-bottom: core.$space2;
     font-weight: typography.$font-normal;
+    padding-bottom: core.$space2;
   }
 
   .searchInputContainer {
+    align-items: center;
     display: flex;
     justify-content: center;
-    align-items: center;
     padding-bottom: core.$space2;
   }
 
   .eventsContainer {
-    display: grid;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     gap: core.$space2;
     grid-template-columns: 1fr;
 
     @include breakpoint.md {
+      display: grid;
       grid-template-columns: repeat(2, 1fr);
     }
 
@@ -37,25 +40,27 @@
   }
 
   .loadMoreButton {
+    align-items: center;
     display: flex;
     justify-content: center;
-    align-items: center;
     padding-top: core.$space7;
   }
 
   .noEvents {
     grid-column: 1 / -1;
-    text-align: center;
     padding: core.$space4 0;
+    text-align: center;
 
     h3 {
       @include typography.heading6;
-      margin-bottom: core.$space2;
+
       color: color.$dice-black;
+      margin-bottom: core.$space2;
     }
 
     p {
       @include typography.regular4;
+
       color: color.$dice-black;
     }
   }

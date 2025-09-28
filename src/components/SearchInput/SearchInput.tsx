@@ -1,6 +1,7 @@
 'use client';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useVenueSearch } from '@/utils/hooks/useVenueSearch';
+import { useKeyboardNavigation } from '@/utils/hooks/useKeyboardNavigation';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import styles from './SearchInput.module.scss';
 import { SIZES } from '@/utils/types';
@@ -19,22 +20,46 @@ export default function SearchInput() {
     handleInputBlur,
   } = useVenueSearch();
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const {
+    activeIndex,
+    handleInputKeyDown,
+    handleOptionKeyDown,
+  } = useKeyboardNavigation({
+    options: displayOptions,
+    onSelect: handleVenueSelect,
+    isVisible: showDropdown,
+  });
+
+  const handleContainerBlur = (e: React.FocusEvent) => {
+    if (!containerRef.current?.contains(e.relatedTarget as Node)) {
+      handleInputBlur();
+    }
+  };
+
   return (
-    <div className={styles.searchContainer}>
+    <div 
+      ref={containerRef}
+      className={styles.searchContainer}
+      onBlur={handleContainerBlur}
+    >
       <div className={styles.inputWrapper}>
         <input
           type="text"
           value={searchTerm}
           onChange={handleInputChange}
           onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
+          onKeyDown={handleInputKeyDown}
           placeholder={localTexts.placeholder}
           className={styles.searchInput}
           role="combobox"
           aria-expanded={showDropdown}
+          aria-controls="search-dropdown"
           aria-haspopup="listbox"
           aria-autocomplete="list"
           aria-describedby="search-help"
+          aria-activedescendant={activeIndex >= 0 ? `search-option-${activeIndex}` : undefined}
         />
         
         {isLoading && (
@@ -54,6 +79,7 @@ export default function SearchInput() {
 
       {showDropdown && (
         <div 
+          id="search-dropdown"
           className={styles.dropdown}
           role="listbox"
           aria-label={localTexts.venueOptions.replace('{count}', displayOptions.length.toString())}
@@ -65,11 +91,13 @@ export default function SearchInput() {
             <div
               key={venue.id}
               id={`search-option-${index}`}
-              className={styles.dropdownItem}
+              className={`${styles.dropdownItem} ${index === activeIndex ? styles.active : ''}`}
               onClick={() => handleVenueSelect(venue)}
+              onKeyDown={(e) => handleOptionKeyDown(e, index)}
               role="option"
-              tabIndex={-1}
+              tabIndex={0}
               aria-label={`${venue.name}, ${venue.city}`}
+              aria-selected={index === activeIndex}
             >
               <div className={styles.venueName}>{venue.name}</div>
               <div className={styles.venueCity}>{venue.city}</div>
