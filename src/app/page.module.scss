@@ -1,11 +1,44 @@
 @use '../style/core.scss' as core;
+@use '../style/typography.scss' as typography;
+@use '../style/breakpoint.scss' as breakpoint;
 
 .homePage {
   .events {
     padding: core.$space4 0;
   }
 
-  .searchInputContainer {
+  .heading {
+    @include typography.heading6;
+
     padding-bottom: core.$space2;
+    font-weight: typography.$font-normal;
+  }
+
+  .searchInputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: core.$space2;
+  }
+
+  .eventsContainer {
+    display: grid;
+    gap: core.$space2;
+    grid-template-columns: 1fr;
+
+    @include breakpoint.md {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoint.lg {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .loadMoreButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: core.$space2;
   }
 }
