@@ -5,5 +5,11 @@
     "tickets": "Tickets",
     "ctaOne": "Get reminded",
     "curfew": "Curfew",
-    "soldOut": "sold out"
+    "soldOut": "sold out",
+    "onSale": "On sale {date}",
+    "playMusic": "Play music preview",
+    "accordionToggle": "Toggle {title} accordion",
+    "eventDetails": "Event details for {title}",
+    "eventImage": "Event image for {title}",
+    "priceFrom": "Price from {price}"
 }

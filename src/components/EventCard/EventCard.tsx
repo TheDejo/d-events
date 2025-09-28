@@ -9,6 +9,7 @@ import { CURRENCIES, STATUS, TAG_TYPES, VARIANTS } from '@/utils/types';
 import PlayIcon from '../Icons/PlayIcon';
 import cx from 'classnames';
 import { helpers } from '@/utils/helper';
+import { kebabCase } from 'lodash';
 
 type EventCardProps = {
   title: string;
@@ -63,32 +64,36 @@ export default function EventCard({
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   
   const hasTracks = (appleMusicTracks && !!appleMusicTracks.length) || (spotifyTracks && !!spotifyTracks.length);
+  const titleId = kebabCase(title);
   
   return (
-    <div className={styles.eventCard}>
+    <article className={styles.eventCard} aria-labelledby={`event-title-${titleId}`}>
       <div className={styles.eventCardHeader}>
          <div className={cx(styles.eventCardImageContainer, { [styles.isAccordionOpen]: isAccordionOpen })}>
              <Image 
                src={isAccordionOpen ? eventImage.landscape : eventImage.square} 
-               alt={eventImage.alt} 
+               alt={localTexts.eventImage.replace('{title}', title)} 
                className={styles.eventCardImage} 
                fill
                priority={true}
              />
               <div className={styles.imageFooter}>
                {hasTracks && (
-                 <Button variant={VARIANTS.TERTIARY}>
+                 <Button 
+                   variant={VARIANTS.TERTIARY}
+                   aria-label={localTexts.playMusic}
+                 >
                    <PlayIcon />
                  </Button>
                )}
-               {featured || status === STATUS.ON_SALE && <Tag type={featured ? TAG_TYPES.FEATURED : TAG_TYPES.ON_SALE} text={`On sale ${helpers.formatDate(saleDate)}`} />}
+               {featured || status === STATUS.ON_SALE && <Tag type={featured ? TAG_TYPES.FEATURED : TAG_TYPES.ON_SALE} text={localTexts.onSale.replace('{date}', helpers.formatDate(saleDate))} />}
                </div>
          </div>
         <div className={styles.textBox}>
-          <p className={styles.date}>
+          <time className={styles.date} dateTime={date.toISOString()}>
             {helpers.formatEventDateTime(date)}
-          </p>
-          <h2 className={styles.title}>{title}</h2>
+          </time>
+          <h2 id={`event-title-${titleId}`} className={styles.title}>{title}</h2>
           <p className={styles.facility}>{venue}</p>
           <p className={styles.location}>{location}</p>
         </div>
@@ -99,16 +104,16 @@ export default function EventCard({
             isOpen={isAccordionOpen}
             onToggle={setIsAccordionOpen}
           >
-            <div className={styles.accordionBody}>
+            <div className={styles.accordionBody} role="region" aria-label={localTexts.eventDetails.replace('{title}', title)}>
               <p className={styles.description}>{description}</p>
-              <div className={styles.lineupSection}>
-                <h4 className={styles.accordionSectionTitle}>{localTexts.lineup}</h4>
+              <div className={styles.lineupSection} role="region" aria-labelledby={`lineup-${titleId}`}>
+                <h4 id={`lineup-${titleId}`} className={styles.accordionSectionTitle}>{localTexts.lineup}</h4>
                 {lineup.map((lineup, index) => (
                   <p key={index}>{lineup.details} {lineup.time && <span className={styles.lineupTimeValue}>— {lineup.time}</span>}</p>
                 ))}
               </div>
-              <div className={styles.ticketsSection}>
-                <h4 className={styles.accordionSectionTitle}>{localTexts.tickets}</h4>
+              <div className={styles.ticketsSection} role="region" aria-labelledby={`tickets-${titleId}`}>
+                <h4 id={`tickets-${titleId}`} className={styles.accordionSectionTitle}>{localTexts.tickets}</h4>
                 {tickets.map((ticket, index) => (
                   <p 
                   key={index}>{ticket.name} 
@@ -123,12 +128,16 @@ export default function EventCard({
           </Accordion>
         </div>
         <div className={styles.footer}>
-            <Button title={soldOut ? localTexts.soldOut : localTexts.ctaOne} disabled={soldOut} />
-            <div className={styles.price}>
-              {isAccordionOpen && <p className={styles.priceLabel}>{localTexts.from}</p>}
-              <p className={styles.priceValue}>{helpers.formatNumber({ number: price, isCurrency: true, currency })}</p>
+            <Button 
+              title={soldOut ? localTexts.soldOut : localTexts.ctaOne} 
+              disabled={soldOut}
+              aria-label={soldOut ? `${localTexts.soldOut} - ${title}` : `${localTexts.ctaOne} for ${title}`}
+            />
+            <div className={styles.price} role="text" aria-label={isAccordionOpen ? localTexts.priceFrom.replace('{price}', helpers.formatNumber({ number: price, isCurrency: true, currency })) : helpers.formatNumber({ number: price, isCurrency: true, currency })}>
+              {isAccordionOpen && <p className={styles.priceLabel} aria-hidden="true">{localTexts.from}</p>}
+              <p className={styles.priceValue} aria-hidden="true">{helpers.formatNumber({ number: price, isCurrency: true, currency })}</p>
             </div>
         </div>
-    </div>
+    </article>
   )
 }

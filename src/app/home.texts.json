@@ -1,6 +1,12 @@
 {
-    "heading": "Up coming events at {venue}",
+    "heading": "Up coming events {venue}",
+    "at": "at",
     "loadMore": "Load More",
     "noEvents": "No events found",
-    "noEventsForVenue": "No events found for {venue}"
+    "noEventsForVenue": "No events found for {venue}",
+    "loadingEvents": "Loading events",
+    "loadingMoreEvents": "Loading more events",
+    "eventsList": "Events list",
+    "searchSection": "Search for events",
+    "mainContent": "Main content"
 }

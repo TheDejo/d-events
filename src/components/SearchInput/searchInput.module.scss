@@ -66,8 +66,14 @@
             border-bottom: none;
         }
 
-        &:hover {
+        &:hover,
+        &.active {
             background-color: color.$dice-background;
+        }
+
+        &.active {
+            outline: core.$space * 2 solid color.$dice-blue;
+            outline-offset: core.$space * -2;
         }
     }
 

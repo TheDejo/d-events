@@ -10,9 +10,10 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     isDashboard?: boolean;
     children?: React.ReactNode;
     isLoading?: boolean;
+    ariaLabel?: string;
 };
 export const Button: React.FC<ButtonProps> = props => {
-  const { className, title, variant = VARIANTS.PRIMARY, disabled, children, isLoading, ...rest } = props;
+  const { className, title, variant = VARIANTS.PRIMARY, disabled, children, isLoading, ariaLabel, ...rest } = props;
 
   const buttonClass = cx(styles.button, className, {
     [styles.primary]: variant === VARIANTS.PRIMARY,
@@ -21,7 +22,14 @@ export const Button: React.FC<ButtonProps> = props => {
   });
 
   return (
-    <button className={buttonClass} {...rest} disabled={disabled}>
+    <button 
+      className={buttonClass} 
+      disabled={disabled}
+      tabIndex={disabled ? -1 : 0}
+      aria-label={ariaLabel || title}
+      aria-disabled={disabled}
+      {...rest}
+    >
       {isLoading && <LoadingSpinner size={SIZES.SMALL} className={styles.loadingSpinner} />}
       {children ? children : title}
     </button>

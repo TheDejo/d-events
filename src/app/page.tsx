@@ -17,7 +17,7 @@ export default function Home() {
   const events  = data?.map((event) => ({
     title: event.name,
     location: event.location.state,
-    price: event.ticket_types[0].price.face_value / CURRENCY_DIVISOR || 0, // Using this priece because the 'price' field is always null
+    price: event.ticket_types[0].price.face_value / CURRENCY_DIVISOR || 0, // Using this price because the 'price' field is always null
     venue: event.venue,
     soldOut: event.sold_out,
     currency: event.currency,
@@ -43,42 +43,52 @@ export default function Home() {
   }));
   return (
     <PageComponentContainer className={styles.homePage}>
-      <section className={styles.events}>
-        <div className={styles.searchInputContainer}>
-          <SearchInput />
-        </div>
-        <div>
-          <h1 className={styles.heading}>{localTexts.heading.replace('{venue}', venue)}</h1>
-        </div>
-        <div className={styles.eventsContainer}>
-          {events && events.length > 0 ? (
-            events.map((event) => (
-              <EventCard 
-              key={event.id} 
-              {...event}
-              />
-            ))
-          ) : !isLoading ? (
-            <div className={styles.noEvents}>
-              <h3>{localTexts.noEvents}</h3>
-              <p>{venue ? localTexts.noEventsForVenue.replace('{venue}', venue) : localTexts.noEvents}</p>
-            </div>
-          ) : null}
-        </div>
-
-        <div className={styles.loadMoreButton}>
-            {isLoading ? (
-              <LoadingSpinner size={SIZES.LARGE} />
-            ) : hasMore ? (
-              <Button 
-                title={localTexts.loadMore} 
-                variant={VARIANTS.SECONDARY} 
-                onClick={loadMore}
-                isLoading={isFetchingMore}
-              />
+      <main role="main" aria-label={localTexts.mainContent}>
+        <section className={styles.events} aria-labelledby="events-heading">
+          <div className={styles.searchInputContainer} role="search" aria-label={localTexts.searchSection}>
+            <SearchInput />
+          </div>
+          <div>
+            <h1 id="events-heading" className={styles.heading}>{localTexts.heading.replace('{venue}', `${localTexts.at} ${venue}`)}</h1>
+          </div>
+          <div 
+            className={styles.eventsContainer}
+            role="region"
+            aria-label={localTexts.eventsList}
+            aria-live="polite"
+            aria-busy={isLoading}
+          >
+            {events && events.length > 0 ? (
+              events.map((event) => (
+                <EventCard 
+                key={event.id} 
+                {...event}
+                />
+              ))
+            ) : !isLoading ? (
+              <div className={styles.noEvents} role="status" aria-live="polite">
+                <h3>{localTexts.noEvents}</h3>
+                <p>{venue ? localTexts.noEventsForVenue.replace('{venue}', venue) : localTexts.noEvents}</p>
+              </div>
             ) : null}
-        </div>
-      </section>
+          </div>
+
+          <div className={styles.loadMoreButton}>
+              {isLoading ? (
+                <div role="status" aria-live="polite" aria-label={localTexts.loadingEvents}>
+                  <LoadingSpinner size={SIZES.LARGE} />
+                </div>
+              ) : hasMore ? (
+                <Button 
+                  title={localTexts.loadMore} 
+                  variant={VARIANTS.SECONDARY} 
+                  onClick={loadMore}
+                  isLoading={isFetchingMore}
+                />
+              ) : null}
+          </div>
+        </section>
+      </main>
     </PageComponentContainer> 
   );  
 }
