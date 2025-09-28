@@ -29,9 +29,18 @@
         padding: 0;
     }
 
+    &:focus {
+        outline: 2px solid color.$dice-blue;
+        outline-offset: 2px;
+    }
+
     &:disabled {
         background-color: color.$dice-gray;
         color: color.$dice-black;
         cursor: not-allowed;
+    }
+
+    &:disabled:focus {
+        outline: none;
     }
 }
