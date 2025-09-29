@@ -1,6 +1,10 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+
+
+# **Divine's Corner**
+
+### **How to run this application**
+
 
 First, run the development server:
 
@@ -16,33 +20,64 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create `.env.local` paste these Environment variables:
 
-## Learn More
+```ts
+NEXT_PUBLIC_BASE_URL=https://events-api.dice.fm/v1
+NEXT_PUBLIC_ENVIRONMENT=development
+```
 
-To learn more about Next.js, take a look at the following resources:
+# **How I approached solving the problem?**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+I approached the solution looking at it as a client facing product and factored in three things, SEO, Accesibility and Internalization.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## **SEO, Accessibility & Internationalization**
 
-## Deploy on Vercel
+### **SEO (Search Engine Optimization)**
+- **Semantic HTML**: Proper heading hierarchy (`<h1>`, `<h2>`, `<h4>`) and semantic elements (`<main>`, `<section>`, `<article>`, `<time>`)
+- **Metadata**: Root layout includes proper `title` and `description` for search engines
+- **Image optimization**: Next.js Image component with descriptive alt text and priority loading
+- **Structured data**: `<time>` elements with `dateTime` attributes for event dates
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### **Accessibility (A11y)**
+- **ARIA implementation**: Comprehensive landmarks, live regions, and state indicators
+- **Keyboard navigation**: Full keyboard support with arrow keys, Enter/Space, and focus management
+- **Screen reader support**: Descriptive labels, status announcements, and context information
+- **Component accessibility**: All interactive elements have meaningful `aria-label` and `aria-labelledby` attributes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### **Internationalization (i18n)**
+- **Text externalization**: All user-facing text stored in component-level `.texts.json` files
+- **Locale-aware formatting**: `Intl.NumberFormat` and `date-fns` for currency, dates, and numbers
+- **Template strings**: Dynamic content with placeholders like `{venue}`, `{title}`, `{price}`
+- **Contextual messaging**: Different text based on component state and user interactions
 
+## **Code Architecture & Approach**
 
-# **Divine's Corner**
+### **Component-Driven Development**
+- **Modular components**: Each component is self-contained with its own styles, tests, and translations
+- **Reusable patterns**: Button, Accordion, and other UI components follow consistent prop interfaces
+- **Separation of concerns**: Business logic in custom hooks, UI logic in components
 
-### **How I approached solving the problem?**
+### **State Management**
+- **Context API**: Global event state management with `EventsContext` and `EventsProvider`
+- **SWR integration**: Server state management with caching, revalidation, and error handling
+- **Local state**: Component-level state for UI interactions (accordion, search, etc.)
 
-I approached the problem by carefully analyzing the  requirements and breaking the solution into several key components:
+### **Testing Strategy**
+- **Comprehensive coverage**: Unit tests for components, integration tests for user flows
+- **Mock strategy**: Real context providers with mocked data layers for realistic testing
 
-1.  **Tools**:
+### **Performance Optimization**
+- **Code splitting**: Strategic use of `'use client'` for interactive components only
+- **Image optimization**: Next.js Image component with priority loading and responsive images
+
+### **Developer Experience**
+- **TypeScript**: Full type safety with custom interfaces and utility types
+- **SCSS modules**: Scoped styling with design tokens and mixins
+- **ESLint/Prettier**: Consistent code formatting and quality standards
+
+### **Tools**:
     - Next.js: Since Create React App is being deprecated (as noted on the React website), Next.js is the recommended choice. It also enables me to showcase server-side rendering (SSR), which is important for this project because the events are client-facing and need to be optimized for SEO, ensuring they appear in search results when users look for events.
     
     - SASS: I chose a preprocessor so I can define mixins, functions, and style tokens that capture design decisions. This allows consistent styling across the events application and makes the codebase more maintainable and scalable.
@@ -52,4 +87,25 @@ I approached the problem by carefully analyzing the  requirements and breaking t
     - classnames: Utility for cleaner, more readable conditional styling, avoiding complex template literals when applying multiple classes.
 
     - SWR: Integrated to enable frontend data caching with stale-while-revalidate, ensuring fast rendering from cache while seamlessly updating with fresh data in the background.
+
+    - Lodash: Used for concise and reliable helper functions, simplifying common data manipulation tasks.
+
+### **Time Spent**
+
+I spent approximately **5.5 hours** on this exercise.
+
+### **What I would add if I had more time and how?**
+
+#### **Testing Infrastructure**
+- **MSW (Mock Service Worker)**: Initially attempted but removed due to high overhead and complexity. Would implement for more realistic API mocking in development and testing environments
+- **E2E Testing**: Cypress for end-to-end user journey testing
+
+#### **User Experience**
+- **More Filters**: Add tags, promoters, date from filters
+- **Map Integration**: Show event locations on an interactive map
+
+#### **Developer Experience**
+- **Storybook**: Component documentation and design system showcase
+
+
 
