@@ -1,4 +1,14 @@
+// Set up environment variables for tests
+process.env.NEXT_PUBLIC_BASE_URL = 'https://api.example.com'
+
+// Import testing library
 import '@testing-library/jest-dom'
+
+// Set up fetch mock
+import fetchMock from 'jest-fetch-mock'
+
+// Enable fetch mocking
+fetchMock.enableMocks()
 
 // Mock Next.js router
 jest.mock('next/router', () => ({
