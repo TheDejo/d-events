@@ -9,7 +9,11 @@ interface LoadingSpinnerProps {
 
 export default function LoadingSpinner({ size = SIZES.SMALL, className }: LoadingSpinnerProps) {
   return (
-    <div className={cx(styles.loadingSpinner, styles[size], className)}>
+    <div 
+      className={cx(styles.loadingSpinner, styles[size], className)}
+      role="status"
+      aria-label="Loading"
+    >
       <div className={styles.loadingSpinnerInner} />
     </div>
   );

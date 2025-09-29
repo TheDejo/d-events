@@ -1,7 +1,7 @@
 {
     "searchResults": "Search results",
     "recentVenues": "Recent venues",
-    "noResults": "No venues found for &quot;{searchTerm}&quot;",
+    "noResults": "No venues found for '{searchTerm}'",
     "placeholder": "Search venues...",
     "helpText": "Type at least 3 characters to search venues. Use arrow keys to navigate results.",
     "loadingLabel": "Loading venues",
