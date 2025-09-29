@@ -58,8 +58,6 @@ export const EventsProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const lastPage = pages?.[pages.length - 1];
   const hasMore = !!lastPage?.links?.next;
 
-  logger({lastPage});
-
   const loadMore = useCallback(() => {
     if (hasMore && !isValidating) setSize(size + 1);
   }, [hasMore, isValidating, setSize, size]);

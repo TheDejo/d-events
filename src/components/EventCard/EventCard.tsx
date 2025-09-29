@@ -10,6 +10,7 @@ import PlayIcon from '../Icons/PlayIcon';
 import cx from 'classnames';
 import { helpers } from '@/utils/helper';
 import { kebabCase } from 'lodash';
+import Link from 'next/link';
 
 type EventCardProps = {
   title: string;
@@ -80,12 +81,13 @@ export default function EventCard({
              />
               <div className={styles.imageFooter}>
                {hasTracks && (
-                 <Button 
-                   variant={VARIANTS.TERTIARY}
+                 <Link 
+                   href={appleMusicTracks?.[0]?.open_url || spotifyTracks?.[0]?.open_url || ''}
+                   target="_blank"
                    aria-label={localTexts.playMusic}
                  >
                    <PlayIcon />
-                 </Button>
+                 </Link>
                )}
                {featured || status === STATUS.ON_SALE && <Tag type={featured ? TAG_TYPES.FEATURED : TAG_TYPES.ON_SALE} text={localTexts.onSale.replace('{date}', helpers.formatDate(saleDate))} />}
                </div>
