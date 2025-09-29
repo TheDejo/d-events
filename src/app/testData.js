@@ -139,6 +139,16 @@ export const mockEventWithMusicResponse = {
           },
           sold_out: false,
         },
+        {
+          id: 3,
+          name: 'Early Bird',
+          price: {
+            total: 6000,
+            fees: 400,
+            face_value: 5600,
+          },
+          sold_out: false,
+        },
       ],
       lineup: [
         {
