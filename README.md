@@ -59,10 +59,18 @@ I approached the solution looking at it as a client facing product and factored 
 - **Reusable patterns**: Button, Accordion, and other UI components follow consistent prop interfaces
 - **Separation of concerns**: Business logic in custom hooks, UI logic in components
 
+### **Architecture & Abstractions**
+- **Central configuration**: Environment variables, API routes, and constants centralized in `config/constants.ts`
+- **Service layer**: Abstracted API calls with typed interfaces and error handling in `config/services/`
+- **Type system**: Comprehensive TypeScript interfaces and enums for type safety across the application
+- **Custom hooks**: Reusable logic for debouncing, keyboard navigation, and state management
+- **Utility functions**: Centralized helpers for formatting, date manipulation, and common operations
+
 ### **State Management**
 - **Context API**: Global event state management with `EventsContext` and `EventsProvider`
 - **SWR integration**: Server state management with caching, revalidation, and error handling
 - **Local state**: Component-level state for UI interactions (accordion, search, etc.)
+- **Persistent storage**: Custom `useLocalStorage` hook for client-side data persistence (recent venues)
 
 ### **Testing Strategy**
 - **Comprehensive coverage**: Unit tests for components, integration tests for user flows
