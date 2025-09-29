@@ -115,5 +115,11 @@ I spent approximately **5.5 hours** on this exercise.
 #### **Developer Experience**
 - **Storybook**: Component documentation and design system showcase
 
+<img width="439" height="457" alt="Screenshot 2025-09-29 at 20 32 46" src="https://github.com/user-attachments/assets/65cdf029-0261-4feb-ab74-872966daebac" />
+
+
+
+
+
 
 
