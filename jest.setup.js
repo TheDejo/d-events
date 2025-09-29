@@ -1,16 +1,6 @@
-// Set up environment variables for tests
 process.env.NEXT_PUBLIC_BASE_URL = 'https://api.example.com'
-
-// Import testing library
 import '@testing-library/jest-dom'
 
-// Set up fetch mock
-import fetchMock from 'jest-fetch-mock'
-
-// Enable fetch mocking
-fetchMock.enableMocks()
-
-// Mock Next.js router
 jest.mock('next/router', () => ({
   useRouter() {
     return {
@@ -34,17 +24,14 @@ jest.mock('next/router', () => ({
   },
 }))
 
-// Mock Next.js Image component
 jest.mock('next/image', () => ({
   __esModule: true,
   default: (props) => {
     const { fill, priority, ...restProps } = props
-    // eslint-disable-next-line @next/next/no-img-element
     return <img {...restProps} />
   },
 }))
 
-// Mock Next.js Link component
 jest.mock('next/link', () => ({
   __esModule: true,
   default: ({ children, href, ...props }) => {
@@ -56,7 +43,6 @@ jest.mock('next/link', () => ({
   },
 }))
 
-// Mock SWR
 jest.mock('swr', () => ({
   __esModule: true,
   default: () => ({
