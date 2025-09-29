@@ -49,7 +49,7 @@ export default function Home() {
             <SearchInput />
           </div>
           <div>
-            <h1 id="events-heading" className={styles.heading}>{localTexts.heading.replace('{venue}', `${localTexts.at} ${venue}`)}</h1>
+            <h1 id="events-heading" className={styles.heading}>{localTexts.heading.replace('{venue}', `${venue ? `${localTexts.at} ${venue}` : ''}`)}</h1>
           </div>
           <div 
             className={styles.eventsContainer}

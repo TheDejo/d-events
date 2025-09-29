@@ -42,7 +42,7 @@ describe('Home Component', () => {
 
     test('should render the main heading', () => {
       renderComponent()
-      expect(screen.getByText('Upcoming events at')).toBeInTheDocument()
+      expect(screen.getByText('Upcoming events')).toBeInTheDocument()
     })
 
     test('should render search input', () => {
@@ -86,22 +86,41 @@ describe('Home Component', () => {
       })
     })
 
-    test('should display play button when music tracks are available', async () => {
-      mockSWRInfinite.mockReturnValue({
-        data: [mockEventWithMusicResponse],
-        size: 1,
-        setSize: jest.fn(),
-        mutate: jest.fn(),
-        isLoading: false,
-        isValidating: false,
-      })
+        test('should display play button when music tracks are available', async () => {
+          mockSWRInfinite.mockReturnValue({
+            data: [mockEventWithMusicResponse],
+            size: 1,
+            setSize: jest.fn(),
+            mutate: jest.fn(),
+            isLoading: false,
+            isValidating: false,
+          })
 
-      renderComponent()
-      
-      await waitFor(() => {
-        expect(screen.getByRole('button', { name: 'Play music preview' })).toBeInTheDocument()
-      })
-    })
+          renderComponent()
+
+          await waitFor(() => {
+            expect(screen.getByRole('link', { name: 'Play music preview' })).toBeInTheDocument()
+          })
+        })
+
+        test('should redirect to music track URL when play button is clicked', async () => {
+          mockSWRInfinite.mockReturnValue({
+            data: [mockEventWithMusicResponse],
+            size: 1,
+            setSize: jest.fn(),
+            mutate: jest.fn(),
+            isLoading: false,
+            isValidating: false,
+          })
+
+          renderComponent()
+
+          await waitFor(() => {
+            const playLink = screen.getByRole('link', { name: 'Play music preview' })
+            expect(playLink).toHaveAttribute('href', 'https://music.apple.com/track/123')
+            expect(playLink).toHaveAttribute('target', '_blank')
+          })
+        })
 
     test('should display featured tag when event is featured', async () => {
       renderComponent()

@@ -5,6 +5,7 @@ import useSWRInfinite from 'swr/infinite';
 import { Event } from '@/utils/types';
 import { constants } from '@/config/constants';
 import { eventsService, EventsParams, GetEvents } from '@/config/services/events';
+import logger from '../logger.config';
 
 const {
   API: { routes: { events } },
@@ -55,7 +56,7 @@ export const EventsProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   );
 
   const lastPage = pages?.[pages.length - 1];
-  const hasMore = (lastPage?.data?.length ?? 0) === PAGE_SIZE;
+  const hasMore = !!lastPage?.links?.next;
 
   const loadMore = useCallback(() => {
     if (hasMore && !isValidating) setSize(size + 1);
