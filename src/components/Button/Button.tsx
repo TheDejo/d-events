@@ -24,6 +24,7 @@ export const Button: React.FC<ButtonProps> = props => {
   return (
     <button 
       className={buttonClass} 
+      type="button"
       disabled={disabled}
       tabIndex={disabled ? -1 : 0}
       aria-label={ariaLabel || title}

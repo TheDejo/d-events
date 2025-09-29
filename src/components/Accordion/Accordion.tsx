@@ -15,12 +15,22 @@ export default function Accordion({ children, title, isOpen, onToggle }: Accordi
     onToggle(!isOpen);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleAccordion();
+    }
+  };
+
   return (
     <div className={styles.accordion}>
       <button 
         className={styles.accordionHeader}
         onClick={toggleAccordion}
+        onKeyDown={handleKeyDown}
         type="button"
+        aria-expanded={isOpen}
+        aria-controls="accordion-content"
       >
         <span>{title}</span>
         <span className={styles.indicator}>
@@ -28,7 +38,10 @@ export default function Accordion({ children, title, isOpen, onToggle }: Accordi
         </span>
       </button>
       
-      <div className={cx(styles.accordionContent, { [styles.open]: isOpen })}>
+      <div 
+        id="accordion-content"
+        className={cx(styles.accordionContent, { [styles.open]: isOpen })}
+      >
         {children}
       </div>
     </div>
