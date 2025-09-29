@@ -42,7 +42,7 @@ describe('Home Component', () => {
 
     test('should render the main heading', () => {
       renderComponent()
-      expect(screen.getByText('Upcoming events at')).toBeInTheDocument()
+      expect(screen.getByText('Upcoming events')).toBeInTheDocument()
     })
 
     test('should render search input', () => {
